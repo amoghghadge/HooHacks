@@ -1,5 +1,5 @@
 .App {
-  background-color: white;
+  background-color: #303030;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -10,7 +10,7 @@
 
 .App-header {
   text-align: center;
-  color: black;
+  color: white;
 }
 
 .Main-content {
@@ -20,6 +20,7 @@
 }
 
 .Sidebar {
+  color: white;
   font-size: 18px;
   display: flex;
   flex-direction: column;

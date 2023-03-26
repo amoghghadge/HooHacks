@@ -19,11 +19,11 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-      setTimeout(setData1(await getData("GDP")), 2000);
-      setTimeout(setData2(await getData("CORESTICKM159SFRBATL")), 2000);
-      setTimeout(setData3(await getData("UNRATE")), 2000);
-      setTimeout(setData4(await getData("SP500")), 2000);
-      setTimeout(setData5(await getData("FEDFUNDS")), 2000);
+      setData1(await getData("GDP"));
+      setData2(await getData("CORESTICKM159SFRBATL"));
+      setData3(await getData("UNRATE"));
+      setData4(await getData("SP500"));
+      setData5(await getData("FEDFUNDS"));
     };
 
     fetchData();
@@ -69,21 +69,6 @@ function App() {
     setShowData5(true);
   };
 
-  // Calculate the y-axis domain based on the selected dataset
-  let data = 0;
-  if (showData1) data = data1;
-  if (showData2) data = data2;
-  if (showData3) data = data3;
-  if (showData4) data = data4;
-  if (showData5) data = data5;
-
-  let values = data.map(d => d.value);
-  let minValue = Math.min(...values);
-  let maxValue = Math.max(...values);
-  let buffer = 0.1; // add 10% buffer space to top and bottom
-  // const yMin = Math.round(minValue - buffer * (maxValue - minValue));
-  let yMax = Math.round(maxValue + buffer * (maxValue - minValue));
-
   return (
     <div className="App">
       <header className="App-header">
@@ -101,14 +86,16 @@ function App() {
         <LineChart width={1000} height={600}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" tick={{fontSize: 12 }} />
-          <YAxis domain={[0, yMax]} interval="preserveStartEnd" tickCount={10} tick={{fontSize: 12}}/> {/* Set the y-axis domain */}
+          {showData1 && <YAxis domain={[0, 28000]} interval="preserveStartEnd" tickCount={10} tick={{fontSize: 12}}/>}
+          {!showData1 && !showData5 && <YAxis interval="preserveStartEnd" tickCount={10} tick={{fontSize: 12}}/>}
+          {showData5 && <YAxis domain={[0, 20]} interval="preserveStartEnd" tickCount={10} tick={{fontSize: 12}}/>}
           <Tooltip />
           <Legend />
-          {showData1 && <Line type="monotsone" dataKey="GDP" data={data1} stroke="#8884d8" tick = {{fontSize: 12}}/>}
-          {showData2 && <Line type="monotone" dataKey="Inflation" data={data2} stroke="#82ca9d" tick = {{fontSize: 12}} />}
-          {showData3 && <Line type="monotsone" dataKey="Unemployment Rate" data={data3} stroke="#8884d8" tick = {{fontSize: 12}}/>}
-          {showData4 && <Line type="monotone" dataKey="S&P 500 Price" data={data4} stroke="#82ca9d" tick = {{fontSize: 12}} />}
-          {showData5 && <Line type="monotsone" dataKey="Federal Funds Rate " data={data5} stroke="#8884d8" tick = {{fontSize: 12}}/>}
+          {showData1 && <Line type="monotsone" label="GDP" dataKey="value" data={data1} stroke="#8884d8" tick = {{fontSize: 12}}/>}
+          {showData2 && <Line type="monotsone" label="Inflation Rate" dataKey="value" data={data2} stroke="#82ca9d" tick = {{fontSize: 12}} />}
+          {showData3 && <Line type="monotssone" label="Unemployment Rate" dataKey="value" data={data3} stroke="#8884d8" tick = {{fontSize: 12}}/>}
+          {showData4 && <Line type="monotsone" label="S&P 500 Price" dataKey="value" data={data4} stroke="#82ca9d" tick = {{fontSize: 12}} />}
+          {showData5 && <Line type="monotsone" label="Federal Funds Rate" dataKey="value" data={data5} stroke="#8884d8" tick = {{fontSize: 12}}/>}
         </LineChart>
       </div>
     </div>
