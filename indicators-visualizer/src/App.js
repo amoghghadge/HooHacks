@@ -50,7 +50,7 @@ function App() {
   const maxValue = Math.max(...values);
   const buffer = 0.1; // add 10% buffer space to top and bottom
   // const yMin = Math.round(minValue - buffer * (maxValue - minValue));
-  const yMax = Math.round((maxValue) / 5000) * 5000;
+  const yMax = Math.round(Math.ceil((maxValue) / 2500)) * 2500;
 
   return (
     <div className="App">
@@ -63,16 +63,16 @@ function App() {
         <button onClick={handleData2Click}>Data 2</button>
         <label>
           <input type="checkbox" checked={overlay} onChange={handleOverlayChange} />
-          Overlay
+          Graph
         </label>
         <LineChart width={1200} height={500}>
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="date" />
-          <YAxis domain={[0, yMax]} interval="preserveStartEnd" tickCount={10}/> {/* Set the y-axis domain */}
+          <XAxis dataKey="date" tick={{fontSize: 12 }} />
+          <YAxis domain={[0, yMax]} interval="preserveStartEnd" tickCount={10} tick={{fontSize: 12}}/> {/* Set the y-axis domain */}
           <Tooltip />
           <Legend />
-          {showData1 && <Line type="monotone" dataKey="value" data={data1} stroke="#8884d8" />}
-          {showData2 && <Line type="monotone" dataKey="value" data={data2} stroke="#82ca9d" />}
+          {showData1 && <Line type="monotsone" dataKey="value" data={data1} stroke="#8884d8" tick = {{fontSize: 12}}/>}
+          {showData2 && <Line type="monotone" dataKey="value" data={data2} stroke="#82ca9d" tick = {{fontSize: 12}} fontSize='12'/>}
         </LineChart>
     </div>
     </div>
