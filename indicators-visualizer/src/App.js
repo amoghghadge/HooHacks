@@ -93,7 +93,7 @@ function App() {
           <Legend />
           {showData1 && <Line type="monotsone" label="GDP" dataKey="value" data={data1} stroke="#8884d8" tick = {{fontSize: 12}}/>}
           {showData2 && <Line type="monotsone" label="Inflation Rate" dataKey="value" data={data2} stroke="#82ca9d" tick = {{fontSize: 12}} />}
-          {showData3 && <Line type="monotssone" label="Unemployment Rate" dataKey="value" data={data3} stroke="#8884d8" tick = {{fontSize: 12}}/>}
+          {showData3 && <Line type="monotsone" label="Unemployment Rate" dataKey="value" data={data3} stroke="#8884d8" tick = {{fontSize: 12}}/>}
           {showData4 && <Line type="monotsone" label="S&P 500 Price" dataKey="value" data={data4} stroke="#82ca9d" tick = {{fontSize: 12}} />}
           {showData5 && <Line type="monotsone" label="Federal Funds Rate" dataKey="value" data={data5} stroke="#8884d8" tick = {{fontSize: 12}}/>}
         </LineChart>
@@ -111,7 +111,7 @@ async function getData(series_id) {
     }
   };
 
-  const proxy = 'https://cors-anywhere.herokuapp.com/';
+  const proxy = 'https://proxy.cors.sh/';
   const requestUrl = `${proxy}https://api.stlouisfed.org/fred/series/observations?series_id=${series_id}&api_key=fcdeab3eee29ac18a7152128f5e48673&file_type=json`;
 
   const response = await fetch(requestUrl, requestOptions);
