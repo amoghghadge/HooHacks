@@ -16,7 +16,7 @@
 .Main-content {
   display: flex;
   flex-direction: row;
-  column-gap: 10px;
+  column-gap: 30px;
 }
 
 .Sidebar {
@@ -25,4 +25,17 @@
   display: flex;
   flex-direction: column;
   row-gap: 20px;
+}
+
+.Main {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.Data-selector {
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+  margin-left: auto;
 }
