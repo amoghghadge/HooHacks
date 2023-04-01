@@ -11,6 +11,7 @@ function App() {
   const [isLoading, setLoading] = useState(true);
   const [minValue, setMinValue] = useState(0);
   const [maxValue, setMaxValue] = useState(0);
+  const [buffer, setBuffer] = useState(0.05);
 
   useEffect(() => {
     console.log("App loading");
@@ -30,8 +31,11 @@ function App() {
 
   useEffect(() => {
     const values = data.map(d => d.value);
-    setMinValue(Math.min(...values));
-    setMaxValue(Math.max(...values));
+    let min = Math.min(...values);
+    let max = Math.max(...values);
+    setMinValue(Math.round(min - buffer * (max - min)));
+    setMaxValue(Math.round(max + buffer * (max - min)));
+    // eslint-disable-next-line
   }, [data])
 
   if (isLoading) {
