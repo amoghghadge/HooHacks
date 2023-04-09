@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import './App.css';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line } from 'recharts';
 import Button from '@mui/joy/Button';
 import CircularProgress from '@mui/joy/CircularProgress';
 
@@ -201,7 +201,7 @@ function App() {
             <YAxis domain={[minValue, maxValue]} interval="preserveStartEnd" tickCount={10} tick={{ fontSize: 12 }} />
             <Tooltip />
             <Legend />
-            <Line name={chartTitle} type="monotsone" dataKey="value" data={data} stroke="#0A6ADD" tick={{ fontSize: 12 }} />
+            <Line name={chartTitle} type="monotone" dataKey="value" data={data} stroke="#0A6ADD" tick={{ fontSize: 12 }} />
           </LineChart>
         </div>
       </div>
@@ -212,13 +212,14 @@ function App() {
     let requestOptions = {
       method: 'GET',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+        'x-cors-api-key': `${process.env.REACT_APP_CORSKEY}`
       }
     };
 
     const proxy = 'https://proxy.cors.sh/';
-    // const proxy = 'https://cors-anywhere.herokuapp.com/';
-    const requestUrl = `${proxy}https://api.stlouisfed.org/fred/series/observations?series_id=${series_id}&api_key=fcdeab3eee29ac18a7152128f5e48673&file_type=json`;
+    const requestUrl = `${proxy}https://api.stlouisfed.org/fred/series/observations?series_id=${series_id}&api_key=${process.env.REACT_APP_FREDKEY}&file_type=json`;
 
     const response = await fetch(requestUrl, requestOptions);
     const data = await response.json();
