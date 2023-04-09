@@ -213,6 +213,7 @@ function App() {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        'Origin': `${window.location.origin.toString()}`,
         'X-Requested-With': 'XMLHttpRequest',
         'x-cors-api-key': `${process.env.REACT_APP_CORSKEY}`
       }
