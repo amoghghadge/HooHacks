@@ -201,7 +201,7 @@ function App() {
             <YAxis domain={[minValue, maxValue]} interval="preserveStartEnd" tickCount={10} tick={{ fontSize: 12 }} />
             <Tooltip />
             <Legend />
-            <Line name={chartTitle} type="monotone" dataKey="value" data={data} stroke="#0A6ADD" tick={{ fontSize: 12 }} />
+            <Line isAnimationActive={false} name={chartTitle} type="monotone" dataKey="value" data={data} stroke="#0A6ADD" tick={{ fontSize: 12 }} />
           </LineChart>
         </div>
       </div>
